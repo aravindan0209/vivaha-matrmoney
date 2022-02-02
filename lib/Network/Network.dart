@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 class Network {
-  final String _url = 'https://lankavivaha.com/dev/';
+  final String _url = 'https://lankavivaha.com/dev/1';
 
   login(apiUrl, data) async {
     return await Dio().post(apiUrl,
