@@ -1,6 +1,8 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:meet_me/Network/Network.dart';
 import 'package:meet_me/pages/screens.dart';
 
 // ignore: must_be_immutable
@@ -8,6 +10,9 @@ class Signin extends StatelessWidget {
   Signin({Key? key}) : super(key: key);
 
   DateTime? currentBackPressTime;
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,7 +71,7 @@ class Signin extends StatelessWidget {
                           heightSpace,
                           heightSpace,
                           heightSpace,
-                          otherOptions(context),
+                          // otherOptions(context),
                           heightSpace,
                           heightSpace,
                           heightSpace,
@@ -118,6 +123,7 @@ class Signin extends StatelessWidget {
         ],
       ),
       child: TextField(
+        controller: emailController,
         cursorColor: primaryColor,
         style: black15SemiBoldTextStyle,
         decoration: InputDecoration(
@@ -149,6 +155,7 @@ class Signin extends StatelessWidget {
             ],
           ),
           child: TextField(
+            controller: passwordController,
             obscureText: true,
             cursorColor: primaryColor,
             style: black15SemiBoldTextStyle,
@@ -261,10 +268,13 @@ class Signin extends StatelessWidget {
 
   signinButton(context) {
     return InkWell(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const Signup()),
-      ),
+      onTap: () => {
+        /*Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const Signup()),
+        )*/
+        signIn(context)
+      },
       child: Container(
         padding: const EdgeInsets.all(fixPadding * 1.5),
         alignment: Alignment.center,
@@ -278,5 +288,18 @@ class Signin extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  signIn(context) async {
+    var data = {'email_id': emailController.text.trim(), 'password': passwordController.text.trim()};
+    var res = await Network()
+        .login('https://lankavivaha.com/dev/api/login.php', data);
+    var body = json.decode(res.data);
+    if (body['status'] == "1") {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const Home()),
+      );
+    } else {}
   }
 }
