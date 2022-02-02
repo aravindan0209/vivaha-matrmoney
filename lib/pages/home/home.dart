@@ -107,8 +107,9 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Home',
+          'Home Page',
           style: black20BoldTextStyle,
+        
         ),
       ),
       body: ListView(
