@@ -2,15 +2,24 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:meet_me/Network/Network.dart';
+import 'package:meet_me/constants/Network.dart';
+
 import 'package:meet_me/pages/screens.dart';
 
 // ignore: must_be_immutable
-class Signin extends StatelessWidget {
-  Signin({Key? key}) : super(key: key);
+class Signin extends StatefulWidget {
+  Signin({Key key}) : super(key: key);
 
-  DateTime? currentBackPressTime;
+  @override
+  State<Signin> createState() => _SigninState();
+}
+
+class _SigninState extends State<Signin> {
+  DateTime currentBackPressTime;
+  bool _isObscure = true;
+
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
 
   @override
@@ -35,15 +44,28 @@ class Signin extends StatelessWidget {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: Text(
-              'Sign In',
-              style: white20BoldTextStyle,
+            title: ListTile(
+              leading: Text(
+                'Sign In',
+                style: white20BoldTextStyle,
+              ),
+              trailing: GestureDetector(
+                  child: Text(
+                    'Register Free',
+                    style: white20BoldTextStyle,
+                  ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Signup()),
+                    );
+                  }),
             ),
           ),
           body: ListView(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height - 120,
+                height: MediaQuery.of(context).size.height - 140,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -85,6 +107,41 @@ class Signin extends StatelessWidget {
                   ],
                 ),
               ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: 15.0),
+                  child: Container(
+                    height: 60,
+                    width: 400,
+                    color: Colors.grey,
+                    child: GestureDetector(
+                        child: Center(
+                          child: Column(
+                            children: [
+                              Text(
+                                'Not yet signup?',
+                                style: TextStyle(color: Colors.black87),
+                              ),
+                              Text(
+                                'Register Now',
+                                style: TextStyle(
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20),
+                              )
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => Signup()),
+                          );
+                        }),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -95,7 +152,7 @@ class Signin extends StatelessWidget {
   onWillPop() {
     DateTime now = DateTime.now();
     if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
+        now.difference(currentBackPressTime) > const Duration(seconds: 2)) {
       currentBackPressTime = now;
       Fluttertoast.showToast(
         msg: 'Press Back Once Again to Exit.',
@@ -156,13 +213,24 @@ class Signin extends StatelessWidget {
           ),
           child: TextField(
             controller: passwordController,
-            obscureText: true,
+            obscureText: _isObscure,
             cursorColor: primaryColor,
             style: black15SemiBoldTextStyle,
             decoration: InputDecoration(
               isDense: true,
               contentPadding: EdgeInsets.zero,
               hintText: 'Password',
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _isObscure ? Icons.visibility : Icons.visibility_off,
+                  color: Colors.green,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _isObscure = !_isObscure;
+                  });
+                },
+              ),
               hintStyle: grey15RegularTextStyle,
               border: const UnderlineInputBorder(borderSide: BorderSide.none),
             ),
@@ -177,7 +245,7 @@ class Signin extends StatelessWidget {
     );
   }
 
-  otherOptions(context) {
+  /*otherOptions(context) {
     return Column(
       children: [
         Row(
@@ -251,10 +319,10 @@ class Signin extends StatelessWidget {
               style: grey14SemiBoldTextStyle,
             ),
             InkWell(
-              onTap: () => Navigator.push(
+             */ /* onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Signup()),
-              ),
+              ),*/ /*
               child: Text(
                 'Sign Up',
                 style: primaryColor14SemiBoldTextStyle,
@@ -264,7 +332,7 @@ class Signin extends StatelessWidget {
         ),
       ],
     );
-  }
+  }*/
 
   signinButton(context) {
     return InkWell(
@@ -291,7 +359,10 @@ class Signin extends StatelessWidget {
   }
 
   signIn(context) async {
-    var data = {'email_id': emailController.text.trim(), 'password': passwordController.text.trim()};
+    var data = {
+      'email_id': emailController.text.trim(),
+      'password': passwordController.text.trim()
+    };
     var res = await Network()
         .login('https://lankavivaha.com/dev/api/login.php', data);
     var body = json.decode(res.data);
