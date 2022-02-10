@@ -2,14 +2,14 @@ import 'package:meet_me/pages/screens.dart';
 import 'package:meet_me/widget/column_builder.dart';
 
 class Matches extends StatefulWidget {
-  const Matches({Key? key}) : super(key: key);
+  const Matches({Key key}) : super(key: key);
 
   @override
   _MatchesState createState() => _MatchesState();
 }
 
 class _MatchesState extends State<Matches> {
-  late double height;
+  double height;
 
   final matchesList = [
     {
@@ -115,8 +115,8 @@ class _MatchesState extends State<Matches> {
               MaterialPageRoute(
                 builder: (context) => ProfileDetails(
                   tag: matchesList[index],
-                  image: item['image'] as String?,
-                  id: item['id'] as String?,
+                  image: item['image'] as String,
+                  id: item['id'] as String,
                 ),
               ),
             ),
@@ -164,14 +164,14 @@ class _MatchesState extends State<Matches> {
                                   });
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: item['star']! == true
+                                      content: item['star'] == true
                                           ? const Text('Add to shortlist')
                                           : const Text('Remove from shortlist'),
                                     ),
                                   );
                                 },
                                 child: Icon(
-                                  item['star']! == true
+                                  item['star'] == true
                                       ? Icons.star_rounded
                                       : Icons.star_border_rounded,
                                   color: primaryColor,
@@ -251,7 +251,7 @@ class _MatchesState extends State<Matches> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => MatchResult(
-                                      image: item['image'] as String?,
+                                      image: item['image'] as String,
                                     ),
                                   ),
                                 ),

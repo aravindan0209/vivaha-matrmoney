@@ -1,7 +1,7 @@
 import 'package:meet_me/pages/screens.dart';
 
 class UpgradePlan extends StatelessWidget {
-  const UpgradePlan({Key? key}) : super(key: key);
+  const UpgradePlan({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

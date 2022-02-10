@@ -1,7 +1,7 @@
 import 'package:meet_me/pages/screens.dart';
 
 class Shortlist extends StatefulWidget {
-  const Shortlist({Key? key}) : super(key: key);
+  const Shortlist({Key key}) : super(key: key);
 
   @override
   _ShortlistState createState() => _ShortlistState();
@@ -139,7 +139,7 @@ class _ShortlistState extends State<Shortlist> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         image: DecorationImage(
-                          image: AssetImage(item['image']!),
+                          image: AssetImage(item['image']),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -151,7 +151,7 @@ class _ShortlistState extends State<Shortlist> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            item['name']!,
+                            item['name'],
                             style: black14SemiBoldTextStyle,
                           ),
                           Text(

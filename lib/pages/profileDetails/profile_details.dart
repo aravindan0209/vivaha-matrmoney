@@ -4,9 +4,9 @@ import 'package:meet_me/widget/column_builder.dart';
 class ProfileDetails extends StatefulWidget {
   // ignore: prefer_typing_uninitialized_variables
   final tag;
-  final String? image;
-  final String? id;
-  const ProfileDetails({Key? key, this.image, this.tag, this.id = '#123689'})
+  final String image;
+  final String id;
+  const ProfileDetails({Key key, this.image, this.tag, this.id = '#123689'})
       : super(key: key);
 
   @override
@@ -234,7 +234,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
               ),
             ),
             title: Text(
-              widget.id!,
+              widget.id,
               style: white20BoldTextStyle,
             ),
             flexibleSpace: FlexibleSpaceBar(
@@ -243,7 +243,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                 child: Container(
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage(widget.image!),
+                      image: AssetImage(widget.image),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -607,7 +607,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      item['title']!,
+                      item['title'],
                       style: grey13SemiBoldTextStyle,
                     ),
                   ),
@@ -646,7 +646,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      item['title']!,
+                      item['title'],
                       style: grey13SemiBoldTextStyle,
                     ),
                   ),
@@ -683,7 +683,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
               child: Row(
                 children: [
                   Text(
-                    item['hobby']!,
+                    item['hobby'],
                     style: grey13SemiBoldTextStyle,
                   ),
                 ],
@@ -716,7 +716,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      item['title']!,
+                      item['title'],
                       style: grey13SemiBoldTextStyle,
                     ),
                   ),
@@ -757,7 +757,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      item['title']!,
+                      item['title'],
                       style: grey13SemiBoldTextStyle,
                     ),
                   ),
@@ -848,7 +848,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      item['title']!,
+                      item['title'],
                       style: grey13SemiBoldTextStyle,
                     ),
                   ),
@@ -910,7 +910,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      item['title']!,
+                      item['title'],
                       style: grey13SemiBoldTextStyle,
                     ),
                   ),
@@ -951,7 +951,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      item['title']!,
+                      item['title'],
                       style: grey13SemiBoldTextStyle,
                     ),
                   ),
@@ -992,7 +992,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      item['title']!,
+                      item['title'],
                       style: grey13SemiBoldTextStyle,
                     ),
                   ),
@@ -1033,7 +1033,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      item['title']!,
+                      item['title'],
                       style: grey13SemiBoldTextStyle,
                     ),
                   ),
@@ -1074,7 +1074,7 @@ class _ProfileDetailsState extends State<ProfileDetails> {
                   Expanded(
                     flex: 1,
                     child: Text(
-                      item['title']!,
+                      item['title'],
                       style: grey13SemiBoldTextStyle,
                     ),
                   ),

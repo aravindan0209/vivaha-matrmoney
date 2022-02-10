@@ -5,14 +5,14 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meet_me/pages/screens.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({Key? key}) : super(key: key);
+  const Splash({Key key}) : super(key: key);
 
   @override
   _SplashState createState() => _SplashState();
 }
 
 class _SplashState extends State<Splash> {
-  DateTime? currentBackPressTime;
+  DateTime currentBackPressTime;
 
   @override
   void initState() {
@@ -70,7 +70,7 @@ class _SplashState extends State<Splash> {
   onWillPop() {
     DateTime now = DateTime.now();
     if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
+        now.difference(currentBackPressTime) > const Duration(seconds: 2)) {
       currentBackPressTime = now;
       Fluttertoast.showToast(
         msg: 'Press Back Once Again to Exit.',

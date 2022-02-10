@@ -1,7 +1,7 @@
 import 'package:meet_me/pages/screens.dart';
 
 class ProfileViews extends StatefulWidget {
-  const ProfileViews({Key? key}) : super(key: key);
+  const ProfileViews({Key key}) : super(key: key);
 
   @override
   _ProfileViewsState createState() => _ProfileViewsState();
@@ -106,7 +106,7 @@ class _ProfileViewsState extends State<ProfileViews> {
                   MaterialPageRoute(
                     builder: (context) => ProfileDetails(
                       tag: profileList[index],
-                      image: item['image'] as String?,
+                      image: item['image'] as String,
                     ),
                   ),
                 ),
@@ -151,14 +151,14 @@ class _ProfileViewsState extends State<ProfileViews> {
                                   });
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
-                                      content: item['star']! == true
+                                      content: item['star'] == true
                                           ? const Text('Add to shortlist')
                                           : const Text('Remove from shortlist'),
                                     ),
                                   );
                                 },
                                 child: Icon(
-                                  item['star']! == true
+                                  item['star'] == true
                                       ? Icons.star_rounded
                                       : Icons.star_border_rounded,
                                   color: primaryColor,

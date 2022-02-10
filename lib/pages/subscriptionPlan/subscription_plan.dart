@@ -2,7 +2,7 @@ import 'package:meet_me/pages/screens.dart';
 import 'package:meet_me/widget/column_builder.dart';
 
 class SubscriptionPaln extends StatefulWidget {
-  const SubscriptionPaln({Key? key}) : super(key: key);
+  const SubscriptionPaln({Key key}) : super(key: key);
 
   @override
   State<SubscriptionPaln> createState() => _SubscriptionPalnState();
@@ -107,7 +107,7 @@ class _SubscriptionPalnState extends State<SubscriptionPaln> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        item['name']!,
+                        item['name'],
                         style: TextStyle(
                           color: isSelected == index ? whiteColor : blackColor,
                           fontSize: 18,
@@ -115,7 +115,7 @@ class _SubscriptionPalnState extends State<SubscriptionPaln> {
                         ),
                       ),
                       Text(
-                        item['price']!,
+                        item['price'],
                         style: TextStyle(
                           color: isSelected == index ? whiteColor : blackColor,
                           fontSize: 18,
@@ -127,13 +127,13 @@ class _SubscriptionPalnState extends State<SubscriptionPaln> {
                   heightSpace,
                   heightSpace,
                   heightSpace,
-                  planDetail(item['detail1']!, index),
+                  planDetail(item['detail1'], index),
                   heightSpace,
                   heightSpace,
-                  planDetail(item['detail2']!, index),
+                  planDetail(item['detail2'], index),
                   heightSpace,
                   heightSpace,
-                  planDetail(item['detail3']!, index),
+                  planDetail(item['detail3'], index),
                   heightSpace,
                 ],
               ),

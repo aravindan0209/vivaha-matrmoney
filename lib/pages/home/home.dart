@@ -2,15 +2,15 @@ import 'package:meet_me/pages/screens.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  const Home({Key key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
-  late double height;
-  late double width;
+  double height;
+  double width;
 
   final newMatchesList = [
     {
@@ -109,7 +109,6 @@ class _HomeState extends State<Home> {
         title: Text(
           'Home Page',
           style: black20BoldTextStyle,
-        
         ),
       ),
       body: ListView(
@@ -239,8 +238,8 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(
                       builder: (context) => ProfileDetails(
                         tag: newMatchesList[index],
-                        image: item['image'] as String?,
-                        id: item['id'] as String?,
+                        image: item['image'] as String,
+                        id: item['id'] as String,
                       ),
                     ),
                   ),
@@ -281,7 +280,7 @@ class _HomeState extends State<Home> {
                                     });
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: item['star']! == true
+                                        content: item['star'] == true
                                             ? const Text('Add to shortlist')
                                             : const Text(
                                                 'Remove from shortlist'),
@@ -289,7 +288,7 @@ class _HomeState extends State<Home> {
                                     );
                                   },
                                   child: Icon(
-                                    item['star']! == true
+                                    item['star'] == true
                                         ? Icons.star_rounded
                                         : Icons.star_border_rounded,
                                     size: 18,
@@ -551,8 +550,8 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(
                       builder: (context) => ProfileDetails(
                         tag: membersList[index],
-                        image: item['image'] as String?,
-                        id: item['id'] as String?,
+                        image: item['image'] as String,
+                        id: item['id'] as String,
                       ),
                     ),
                   ),
@@ -593,7 +592,7 @@ class _HomeState extends State<Home> {
                                     });
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: item['star']! == true
+                                        content: item['star'] == true
                                             ? const Text('Add to shortlist')
                                             : const Text(
                                                 'Remove from shortlist'),
@@ -601,7 +600,7 @@ class _HomeState extends State<Home> {
                                     );
                                   },
                                   child: Icon(
-                                    item['star']! == true
+                                    item['star'] == true
                                         ? Icons.star_rounded
                                         : Icons.star_border_rounded,
                                     size: 18,

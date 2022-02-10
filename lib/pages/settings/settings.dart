@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:meet_me/pages/screens.dart';
 
 class Settings extends StatefulWidget {
-  const Settings({Key? key}) : super(key: key);
+  const Settings({Key key}) : super(key: key);
 
   @override
   _SettingsState createState() => _SettingsState();

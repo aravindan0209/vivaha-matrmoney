@@ -1,7 +1,7 @@
 import 'package:meet_me/pages/screens.dart';
 
 class Notifications extends StatefulWidget {
-  const Notifications({Key? key}) : super(key: key);
+  const Notifications({Key key}) : super(key: key);
 
   @override
   _NotificationsState createState() => _NotificationsState();
@@ -124,18 +124,18 @@ class _NotificationsState extends State<Notifications> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        item['title']!,
+                        item['title'],
                         style: black14RegularTextStyle,
                       ),
                       Text(
-                        item['description']!,
+                        item['description'],
                         overflow: TextOverflow.fade,
                         style: grey13RegularTextStyle,
                       ),
                       Align(
                         alignment: Alignment.centerRight,
                         child: Text(
-                          item['time']!,
+                          item['time'],
                           textAlign: TextAlign.end,
                           style: grey11SemiBoldTextStyle,
                         ),

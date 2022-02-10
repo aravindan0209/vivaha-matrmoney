@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:meet_me/constants/Network.dart';
+import 'package:meet_me/Network/Network.dart';
 
 import 'package:meet_me/pages/screens.dart';
 

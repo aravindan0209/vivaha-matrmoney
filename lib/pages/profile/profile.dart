@@ -1,7 +1,7 @@
 import 'package:meet_me/pages/screens.dart';
 
 class Profile extends StatelessWidget {
-  const Profile({Key? key}) : super(key: key);
+  const Profile({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -198,9 +198,9 @@ class Profile extends StatelessWidget {
     );
   }
 
-  detail({required String title, required String image, Color? color, Function? ontap}) {
+  detail({String title, String image, Color color, Function ontap}) {
     return InkWell(
-      onTap: ontap as void Function()?,
+      onTap: ontap as void Function(),
       child: Padding(
         padding: const EdgeInsets.symmetric(
           vertical: fixPadding * 1.2,

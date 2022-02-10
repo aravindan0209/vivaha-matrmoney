@@ -1,7 +1,7 @@
 import 'package:meet_me/pages/screens.dart';
 
 class Chats extends StatefulWidget {
-  const Chats({Key? key}) : super(key: key);
+  const Chats({Key key}) : super(key: key);
 
   @override
   _ChatsState createState() => _ChatsState();
@@ -285,7 +285,7 @@ class _ChatsState extends State<Chats> {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         image: DecorationImage(
-                          image: AssetImage(item['image']!),
+                          image: AssetImage(item['image']),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -299,7 +299,7 @@ class _ChatsState extends State<Chats> {
                           Row(
                             children: [
                               Text(
-                                item['name']!,
+                                item['name'],
                                 style: black14SemiBoldTextStyle,
                               ),
                               const Spacer(),
@@ -330,7 +330,7 @@ class _ChatsState extends State<Chats> {
                             ],
                           ),
                           Text(
-                            item['religion']!,
+                            item['religion'],
                             style: grey13RegularTextStyle,
                           ),
                           Text(

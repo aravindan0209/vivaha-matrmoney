@@ -1,7 +1,7 @@
 import 'package:meet_me/pages/screens.dart';
 
 class MakePayment extends StatelessWidget {
-  MakePayment({Key? key}) : super(key: key);
+  MakePayment({Key key}) : super(key: key);
 
   final nameController = TextEditingController(text: 'Azhar Khan');
   final numberController = TextEditingController(text: '1234 5678 9012 1298');

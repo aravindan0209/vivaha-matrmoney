@@ -2,24 +2,24 @@ import 'package:flutter/cupertino.dart';
 import 'package:meet_me/pages/screens.dart';
 
 class EditDetails extends StatefulWidget {
-  const EditDetails({Key? key}) : super(key: key);
+  const EditDetails({Key key}) : super(key: key);
 
   @override
   _EditDetailsState createState() => _EditDetailsState();
 }
 
 class _EditDetailsState extends State<EditDetails> {
-  String? age;
-  String? gender;
-  String? height;
-  String? weight;
-  String? dob;
-  String? status;
-  String? education;
-  String? religion;
-  String? language;
-  String? occupation;
-  String? livesIn;
+  String age;
+  String gender;
+  String height;
+  String weight;
+  String dob;
+  String status;
+  String education;
+  String religion;
+  String language;
+  String occupation;
+  String livesIn;
   final nameController = TextEditingController(text: 'Azhar Khan');
 
   @override
@@ -210,7 +210,7 @@ class _EditDetailsState extends State<EditDetails> {
                 ),
                 value: age,
                 style: black13RegularTextStyle,
-                onChanged: (String? newValue) {
+                onChanged: (String newValue) {
                   setState(() {
                     age = newValue;
                   });
@@ -288,7 +288,7 @@ class _EditDetailsState extends State<EditDetails> {
                 ),
                 value: gender,
                 style: black13RegularTextStyle,
-                onChanged: (String? newValue) {
+                onChanged: (String newValue) {
                   setState(() {
                     gender = newValue;
                   });
@@ -346,7 +346,7 @@ class _EditDetailsState extends State<EditDetails> {
                 ),
                 value: height,
                 style: black13RegularTextStyle,
-                onChanged: (String? newValue) {
+                onChanged: (String newValue) {
                   setState(() {
                     height = newValue;
                   });
@@ -406,7 +406,7 @@ class _EditDetailsState extends State<EditDetails> {
                 ),
                 value: weight,
                 style: black13RegularTextStyle,
-                onChanged: (String? newValue) {
+                onChanged: (String newValue) {
                   setState(() {
                     weight = newValue;
                   });
@@ -461,7 +461,7 @@ class _EditDetailsState extends State<EditDetails> {
                 ),
                 value: dob,
                 style: black13RegularTextStyle,
-                onChanged: (String? newValue) {
+                onChanged: (String newValue) {
                   setState(() {
                     dob = newValue;
                   });
@@ -519,7 +519,7 @@ class _EditDetailsState extends State<EditDetails> {
                 ),
                 value: status,
                 style: black13RegularTextStyle,
-                onChanged: (String? newValue) {
+                onChanged: (String newValue) {
                   setState(() {
                     status = newValue;
                   });
@@ -577,7 +577,7 @@ class _EditDetailsState extends State<EditDetails> {
                 ),
                 value: education,
                 style: black13RegularTextStyle,
-                onChanged: (String? newValue) {
+                onChanged: (String newValue) {
                   setState(() {
                     education = newValue;
                   });
@@ -637,7 +637,7 @@ class _EditDetailsState extends State<EditDetails> {
                 ),
                 value: religion,
                 style: black13RegularTextStyle,
-                onChanged: (String? newValue) {
+                onChanged: (String newValue) {
                   setState(() {
                     religion = newValue;
                   });
@@ -694,7 +694,7 @@ class _EditDetailsState extends State<EditDetails> {
               ),
               value: language,
               style: black13RegularTextStyle,
-              onChanged: (String? newValue) {
+              onChanged: (String newValue) {
                 setState(() {
                   language = newValue;
                 });
@@ -752,7 +752,7 @@ class _EditDetailsState extends State<EditDetails> {
               ),
               value: occupation,
               style: black13RegularTextStyle,
-              onChanged: (String? newValue) {
+              onChanged: (String newValue) {
                 setState(() {
                   occupation = newValue;
                 });
@@ -807,7 +807,7 @@ class _EditDetailsState extends State<EditDetails> {
               ),
               value: livesIn,
               style: black13RegularTextStyle,
-              onChanged: (String? newValue) {
+              onChanged: (String newValue) {
                 setState(() {
                   livesIn = newValue;
                 });

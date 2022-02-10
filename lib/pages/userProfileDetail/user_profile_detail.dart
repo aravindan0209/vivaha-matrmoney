@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:meet_me/pages/screens.dart';
 
 class UserProfileDetail extends StatefulWidget {
-  const UserProfileDetail({Key? key}) : super(key: key);
+  const UserProfileDetail({Key key}) : super(key: key);
 
   @override
   _UserProfileDetailState createState() => _UserProfileDetailState();

@@ -1,7 +1,7 @@
 import 'package:meet_me/pages/screens.dart';
 
 class Call extends StatelessWidget {
-  const Call({Key? key}) : super(key: key);
+  const Call({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

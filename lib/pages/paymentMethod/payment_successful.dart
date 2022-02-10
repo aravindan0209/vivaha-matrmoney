@@ -4,7 +4,7 @@ import 'dart:ui';
 import 'package:meet_me/pages/screens.dart';
 
 class PaymentSuccessful extends StatefulWidget {
-  const PaymentSuccessful({Key? key}) : super(key: key);
+  const PaymentSuccessful({Key key}) : super(key: key);
 
   @override
   State<PaymentSuccessful> createState() => _PaymentSuccessfulState();

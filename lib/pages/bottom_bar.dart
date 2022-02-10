@@ -4,7 +4,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meet_me/pages/screens.dart';
 
 class BottomBar extends StatefulWidget {
-  const BottomBar({Key? key}) : super(key: key);
+  const BottomBar({Key key}) : super(key: key);
 
   @override
   _BottomBarState createState() => _BottomBarState();
@@ -13,7 +13,7 @@ class BottomBar extends StatefulWidget {
 int currentIndex = 0;
 
 class _BottomBarState extends State<BottomBar> {
-  DateTime? currentBackPressTime;
+  DateTime currentBackPressTime;
 
   changeIndex(index) {
     setState(() {
@@ -63,7 +63,7 @@ class _BottomBarState extends State<BottomBar> {
   onWillPop() {
     DateTime now = DateTime.now();
     if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
+        now.difference(currentBackPressTime) > const Duration(seconds: 2)) {
       currentBackPressTime = now;
       Fluttertoast.showToast(
         msg: 'Press Back Once Again to Exit.',

@@ -2,8 +2,8 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:meet_me/pages/screens.dart';
 
 class MatchResult extends StatelessWidget {
-  final String? image;
-  MatchResult({Key? key, this.image}) : super(key: key);
+  final String image;
+  MatchResult({Key key, this.image}) : super(key: key);
 
   final hobbyList = [
     {
@@ -125,7 +125,7 @@ class MatchResult extends StatelessWidget {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       image: DecorationImage(
-                        image: AssetImage(image!),
+                        image: AssetImage(image),
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -314,8 +314,8 @@ class MatchResult extends StatelessWidget {
                           ),
                           widthSpace,
                           Icon(
-                            item['match']! == true ? Icons.done : Icons.close,
-                            color: item['match']! == true
+                            item['match'] == true ? Icons.done : Icons.close,
+                            color: item['match'] == true
                                 ? Colors.green
                                 : Colors.red,
                             size: 16,

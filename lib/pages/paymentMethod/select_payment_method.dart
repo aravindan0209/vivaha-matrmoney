@@ -1,7 +1,7 @@
 import 'package:meet_me/pages/screens.dart';
 
 class SelectPaymentMethod extends StatefulWidget {
-  const SelectPaymentMethod({Key? key}) : super(key: key);
+  const SelectPaymentMethod({Key key}) : super(key: key);
 
   @override
   _SelectPaymentMethodState createState() => _SelectPaymentMethodState();
@@ -87,13 +87,13 @@ class _SelectPaymentMethodState extends State<SelectPaymentMethod> {
                   child: Column(
                     children: [
                       Image.asset(
-                        item['image']!,
+                        item['image'],
                         height: 20,
                         width: 40,
                       ),
                       heightSpace,
                       Text(
-                        item['name']!,
+                        item['name'],
                         style: black13SemiBoldTextStyle,
                       ),
                     ],

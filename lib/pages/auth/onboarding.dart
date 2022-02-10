@@ -5,7 +5,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meet_me/pages/screens.dart';
 
 class Onboarding extends StatefulWidget {
-  const Onboarding({Key? key}) : super(key: key);
+  const Onboarding({Key key}) : super(key: key);
 
   @override
   _OnboardingState createState() => _OnboardingState();
@@ -14,7 +14,7 @@ class Onboarding extends StatefulWidget {
 class _OnboardingState extends State<Onboarding> {
   final pageViewController = PageController(initialPage: 0);
   int currentPage = 0;
-  DateTime? currentBackPressTime;
+  DateTime currentBackPressTime;
 
   @override
   void initState() {
@@ -92,7 +92,7 @@ class _OnboardingState extends State<Onboarding> {
   onWillPop() {
     DateTime now = DateTime.now();
     if (currentBackPressTime == null ||
-        now.difference(currentBackPressTime!) > const Duration(seconds: 2)) {
+        now.difference(currentBackPressTime) > const Duration(seconds: 2)) {
       currentBackPressTime = now;
       Fluttertoast.showToast(
         msg: 'Press Back Once Again to Exit.',

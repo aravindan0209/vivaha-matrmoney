@@ -1,7 +1,7 @@
 class LoginResponse {
-  ResponseData? responseData;
-  String? status;
-  String? message;
+  ResponseData responseData;
+  String status;
+  String message;
 
   LoginResponse({this.responseData, this.status, this.message});
 
@@ -16,7 +16,7 @@ class LoginResponse {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     if (this.responseData != null) {
-      data['responseData'] = this.responseData!.toJson();
+      data['responseData'] = this.responseData.toJson();
     }
     data['status'] = this.status;
     data['message'] = this.message;
@@ -25,26 +25,26 @@ class LoginResponse {
 }
 
 class ResponseData {
-  String? email;
-  String? matriId;
-  String? userId;
-  String? username;
-  String? gender;
-  String? profilePath;
-  String? message;
-  String? membershipStatus;
-  String? regDate;
+  String email;
+  String matriId;
+  String userId;
+  String username;
+  String gender;
+  String profilePath;
+  String message;
+  String membershipStatus;
+  String regDate;
 
   ResponseData(
       {this.email,
-        this.matriId,
-        this.userId,
-        this.username,
-        this.gender,
-        this.profilePath,
-        this.message,
-        this.membershipStatus,
-        this.regDate});
+      this.matriId,
+      this.userId,
+      this.username,
+      this.gender,
+      this.profilePath,
+      this.message,
+      this.membershipStatus,
+      this.regDate});
 
   ResponseData.fromJson(Map<String, dynamic> json) {
     email = json['email'];

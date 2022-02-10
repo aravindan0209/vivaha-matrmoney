@@ -1,25 +1,25 @@
 import 'package:meet_me/pages/screens.dart';
 
 class SearchFilter extends StatefulWidget {
-  const SearchFilter({Key? key}) : super(key: key);
+  const SearchFilter({Key key}) : super(key: key);
 
   @override
   _SearchFilterState createState() => _SearchFilterState();
 }
 
 class _SearchFilterState extends State<SearchFilter> {
-  String? ageFrom;
-  String? ageTo;
-  String? heightFrom;
-  String? heightTo;
-  String? status;
-  String? country;
-  String? city;
-  String? education;
-  String? profession;
-  String? religion;
-  String? caste;
-  String? income;
+  String ageFrom;
+  String ageTo;
+  String heightFrom;
+  String heightTo;
+  String status;
+  String country;
+  String city;
+  String education;
+  String profession;
+  String religion;
+  String caste;
+  String income;
 
   @override
   Widget build(BuildContext context) {
@@ -165,7 +165,7 @@ class _SearchFilterState extends State<SearchFilter> {
                               ),
                               value: ageFrom,
                               style: black13RegularTextStyle,
-                              onChanged: (String? newValue) {
+                              onChanged: (String newValue) {
                                 setState(() {
                                   ageFrom = newValue;
                                 });
@@ -242,7 +242,7 @@ class _SearchFilterState extends State<SearchFilter> {
                               ),
                               value: ageTo,
                               style: black13RegularTextStyle,
-                              onChanged: (String? newValue) {
+                              onChanged: (String newValue) {
                                 setState(() {
                                   ageTo = newValue;
                                 });
@@ -369,7 +369,7 @@ class _SearchFilterState extends State<SearchFilter> {
                               ),
                               value: heightFrom,
                               style: black13RegularTextStyle,
-                              onChanged: (String? newValue) {
+                              onChanged: (String newValue) {
                                 setState(() {
                                   heightFrom = newValue;
                                 });
@@ -428,7 +428,7 @@ class _SearchFilterState extends State<SearchFilter> {
                               ),
                               value: heightTo,
                               style: black13RegularTextStyle,
-                              onChanged: (String? newValue) {
+                              onChanged: (String newValue) {
                                 setState(() {
                                   heightTo = newValue;
                                 });
@@ -519,7 +519,7 @@ class _SearchFilterState extends State<SearchFilter> {
                     ),
                     value: status,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         status = newValue;
                       });
@@ -602,7 +602,7 @@ class _SearchFilterState extends State<SearchFilter> {
                     ),
                     value: country,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         country = newValue;
                       });
@@ -689,7 +689,7 @@ class _SearchFilterState extends State<SearchFilter> {
                     ),
                     value: city,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         city = newValue;
                       });
@@ -775,7 +775,7 @@ class _SearchFilterState extends State<SearchFilter> {
                     ),
                     value: education,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         education = newValue;
                       });
@@ -861,7 +861,7 @@ class _SearchFilterState extends State<SearchFilter> {
                     ),
                     value: profession,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         profession = newValue;
                       });
@@ -947,7 +947,7 @@ class _SearchFilterState extends State<SearchFilter> {
                     ),
                     value: religion,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         religion = newValue;
                       });
@@ -1032,7 +1032,7 @@ class _SearchFilterState extends State<SearchFilter> {
                     ),
                     value: caste,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         caste = newValue;
                       });
@@ -1116,7 +1116,7 @@ class _SearchFilterState extends State<SearchFilter> {
                     ),
                     value: income,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         income = newValue;
                       });

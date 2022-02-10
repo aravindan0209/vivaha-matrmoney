@@ -2,7 +2,7 @@ import 'package:meet_me/pages/screens.dart';
 import 'package:meet_me/widget/column_builder.dart';
 
 class AddNewMethod extends StatefulWidget {
-  const AddNewMethod({Key? key}) : super(key: key);
+  const AddNewMethod({Key key}) : super(key: key);
 
   @override
   _AddNewMethodState createState() => _AddNewMethodState();
@@ -558,7 +558,7 @@ class _AddNewMethodState extends State<AddNewMethod> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        item['email']!,
+                        item['email'],
                         style: black13RegularTextStyle,
                       ),
                       Container(

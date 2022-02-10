@@ -1,7 +1,7 @@
 import 'package:meet_me/pages/screens.dart';
 
 class Chat extends StatefulWidget {
-  const Chat({Key? key}) : super(key: key);
+  const Chat({Key key}) : super(key: key);
 
   @override
   State<Chat> createState() => _ChatState();
@@ -9,7 +9,7 @@ class Chat extends StatefulWidget {
 
 class _ChatState extends State<Chat> {
   final messageController = TextEditingController();
-  String? _currentMessage;
+  String _currentMessage;
   DateTime time = DateTime.now();
 
   List messageList = [
@@ -119,7 +119,7 @@ class _ChatState extends State<Chat> {
               (index == 0 || item['time'] != messageList[index - 1]['time'])
                   ? true
                   : false;
-          return item['isMe']! == true
+          return item['isMe'] == true
               ? Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.end,

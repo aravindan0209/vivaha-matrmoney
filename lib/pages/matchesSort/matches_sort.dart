@@ -2,25 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:meet_me/pages/screens.dart';
 
 class MatchesSort extends StatefulWidget {
-  const MatchesSort({Key? key}) : super(key: key);
+  const MatchesSort({Key key}) : super(key: key);
 
   @override
   _MatchesSortState createState() => _MatchesSortState();
 }
 
 class _MatchesSortState extends State<MatchesSort> {
-  String? ageFrom;
-  String? ageTo;
-  String? heightFrom;
-  String? heightTo;
-  String? status;
-  String? country;
-  String? city;
-  String? education;
-  String? profession;
-  String? religion;
-  String? caste;
-  String? income;
+  String ageFrom;
+  String ageTo;
+  String heightFrom;
+  String heightTo;
+  String status;
+  String country;
+  String city;
+  String education;
+  String profession;
+  String religion;
+  String caste;
+  String income;
 
   final sortByList = [
     {
@@ -99,14 +99,14 @@ class _MatchesSortState extends State<MatchesSort> {
                     ],
                   ),
                   child: Image.asset(
-                    item['image']!,
+                    item['image'],
                     height: 20,
                     width: 20,
                   ),
                 ),
                 heightSpace,
                 Text(
-                  item['sortBy']!,
+                  item['sortBy'],
                   textAlign: TextAlign.center,
                   style: black13SemiBoldTextStyle,
                 ),
@@ -258,7 +258,7 @@ class _MatchesSortState extends State<MatchesSort> {
                               ),
                               value: ageFrom,
                               style: black13RegularTextStyle,
-                              onChanged: (String? newValue) {
+                              onChanged: (String newValue) {
                                 setState(() {
                                   ageFrom = newValue;
                                 });
@@ -335,7 +335,7 @@ class _MatchesSortState extends State<MatchesSort> {
                               ),
                               value: ageTo,
                               style: black13RegularTextStyle,
-                              onChanged: (String? newValue) {
+                              onChanged: (String newValue) {
                                 setState(() {
                                   ageTo = newValue;
                                 });
@@ -462,7 +462,7 @@ class _MatchesSortState extends State<MatchesSort> {
                               ),
                               value: heightFrom,
                               style: black13RegularTextStyle,
-                              onChanged: (String? newValue) {
+                              onChanged: (String newValue) {
                                 setState(() {
                                   heightFrom = newValue;
                                 });
@@ -521,7 +521,7 @@ class _MatchesSortState extends State<MatchesSort> {
                               ),
                               value: heightTo,
                               style: black13RegularTextStyle,
-                              onChanged: (String? newValue) {
+                              onChanged: (String newValue) {
                                 setState(() {
                                   heightTo = newValue;
                                 });
@@ -612,7 +612,7 @@ class _MatchesSortState extends State<MatchesSort> {
                     ),
                     value: status,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         status = newValue;
                       });
@@ -695,7 +695,7 @@ class _MatchesSortState extends State<MatchesSort> {
                     ),
                     value: country,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         country = newValue;
                       });
@@ -782,7 +782,7 @@ class _MatchesSortState extends State<MatchesSort> {
                     ),
                     value: city,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         city = newValue;
                       });
@@ -868,7 +868,7 @@ class _MatchesSortState extends State<MatchesSort> {
                     ),
                     value: education,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         education = newValue;
                       });
@@ -954,7 +954,7 @@ class _MatchesSortState extends State<MatchesSort> {
                     ),
                     value: profession,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         profession = newValue;
                       });
@@ -1040,7 +1040,7 @@ class _MatchesSortState extends State<MatchesSort> {
                     ),
                     value: religion,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         religion = newValue;
                       });
@@ -1125,7 +1125,7 @@ class _MatchesSortState extends State<MatchesSort> {
                     ),
                     value: caste,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         caste = newValue;
                       });
@@ -1209,7 +1209,7 @@ class _MatchesSortState extends State<MatchesSort> {
                     ),
                     value: income,
                     style: black13RegularTextStyle,
-                    onChanged: (String? newValue) {
+                    onChanged: (String newValue) {
                       setState(() {
                         income = newValue;
                       });

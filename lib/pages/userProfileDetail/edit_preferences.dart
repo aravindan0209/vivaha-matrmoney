@@ -1,20 +1,20 @@
 import 'package:meet_me/pages/screens.dart';
 
 class EditPreferences extends StatefulWidget {
-  const EditPreferences({Key? key}) : super(key: key);
+  const EditPreferences({Key key}) : super(key: key);
 
   @override
   _EditPreferencesState createState() => _EditPreferencesState();
 }
 
 class _EditPreferencesState extends State<EditPreferences> {
-  String? ageFrom;
-  String? ageTo;
-  String? heightFrom;
-  String? heightTo;
-  String? education;
-  String? religion;
-  String? location;
+  String ageFrom;
+  String ageTo;
+  String heightFrom;
+  String heightTo;
+  String education;
+  String religion;
+  String location;
 
   @override
   Widget build(BuildContext context) {
@@ -129,7 +129,7 @@ class _EditPreferencesState extends State<EditPreferences> {
                         ),
                         value: ageFrom,
                         style: black13RegularTextStyle,
-                        onChanged: (String? newValue) {
+                        onChanged: (String newValue) {
                           setState(() {
                             ageFrom = newValue;
                           });
@@ -206,7 +206,7 @@ class _EditPreferencesState extends State<EditPreferences> {
                         ),
                         value: ageTo,
                         style: black13RegularTextStyle,
-                        onChanged: (String? newValue) {
+                        onChanged: (String newValue) {
                           setState(() {
                             ageTo = newValue;
                           });
@@ -306,7 +306,7 @@ class _EditPreferencesState extends State<EditPreferences> {
                         ),
                         value: heightFrom,
                         style: black13RegularTextStyle,
-                        onChanged: (String? newValue) {
+                        onChanged: (String newValue) {
                           setState(() {
                             heightFrom = newValue;
                           });
@@ -365,7 +365,7 @@ class _EditPreferencesState extends State<EditPreferences> {
                         ),
                         value: heightTo,
                         style: black13RegularTextStyle,
-                        onChanged: (String? newValue) {
+                        onChanged: (String newValue) {
                           setState(() {
                             heightTo = newValue;
                           });
@@ -428,7 +428,7 @@ class _EditPreferencesState extends State<EditPreferences> {
               ),
               value: education,
               style: black13RegularTextStyle,
-              onChanged: (String? newValue) {
+              onChanged: (String newValue) {
                 setState(() {
                   education = newValue;
                 });
@@ -486,7 +486,7 @@ class _EditPreferencesState extends State<EditPreferences> {
               ),
               value: religion,
               style: black13RegularTextStyle,
-              onChanged: (String? newValue) {
+              onChanged: (String newValue) {
                 setState(() {
                   religion = newValue;
                 });
@@ -542,7 +542,7 @@ class _EditPreferencesState extends State<EditPreferences> {
               ),
               value: location,
               style: black13RegularTextStyle,
-              onChanged: (String? newValue) {
+              onChanged: (String newValue) {
                 setState(() {
                   location = newValue;
                 });
