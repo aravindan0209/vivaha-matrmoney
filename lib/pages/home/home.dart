@@ -9,8 +9,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  double height;
-  double width;
+   double height;
+   double width;
 
   final newMatchesList = [
     {
@@ -107,7 +107,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Home Page',
+          'Home',
           style: black20BoldTextStyle,
         ),
       ),
@@ -221,7 +221,7 @@ class _HomeState extends State<Home> {
       children: [
         title('New Matches'),
         SizedBox(
-          height: height * 0.22,
+          height: height * 0.24,
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,
@@ -533,7 +533,7 @@ class _HomeState extends State<Home> {
       children: [
         title('${membersList.length} Members Looking For You'),
         SizedBox(
-          height: height * 0.22,
+          height: height * 0.24,
           child: ListView.builder(
             physics: const BouncingScrollPhysics(),
             scrollDirection: Axis.horizontal,

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:meet_me/Network/Network.dart';
+import 'package:meet_me/constants/Network.dart';
 
 import 'package:meet_me/pages/screens.dart';
 
@@ -50,16 +50,17 @@ class _SigninState extends State<Signin> {
                 style: white20BoldTextStyle,
               ),
               trailing: GestureDetector(
-                  child: Text(
-                    'Register Free',
-                    style: white20BoldTextStyle,
-                  ),
-                  onTap: () {
+                child: Text(
+                  'Register Free',
+                  style: white20BoldTextStyle,
+                ),
+                  onTap:() {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Signup()),
+                      MaterialPageRoute(builder: (context) =>  Signup()),
                     );
-                  }),
+                  }
+              ),
             ),
           ),
           body: ListView(
@@ -102,46 +103,45 @@ class _SigninState extends State<Signin> {
                           heightSpace,
                           signinButton(context),
                         ],
+
                       ),
                     ),
+
+
                   ],
                 ),
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: 15.0),
-                  child: Container(
-                    height: 60,
-                    width: 400,
-                    color: Colors.grey,
-                    child: GestureDetector(
-                        child: Center(
-                          child: Column(
-                            children: [
-                              Text(
-                                'Not yet signup?',
-                                style: TextStyle(color: Colors.black87),
-                              ),
-                              Text(
-                                'Register Now',
-                                style: TextStyle(
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 20),
-                              )
-                            ],
-                          ),
-                        ),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => Signup()),
-                          );
-                        }),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding:  EdgeInsets.only(bottom: 15.0),
+            child: Container(
+              height: 60,
+              width: 400,
+              color: Colors.grey,
+              child: GestureDetector(
+                child: Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        'Not yet signup?',style: TextStyle(color: Colors.black87),
+                      ),
+                      Text(
+                          'Register Now',style: TextStyle(color: Colors.black87,fontWeight: FontWeight.bold,fontSize:20),
+                      )
+                    ],
                   ),
                 ),
+                onTap:() {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  Signup()),
+                  );
+                }
               ),
+            ),
+          ),
+        ),
             ],
           ),
         ),
@@ -319,10 +319,10 @@ class _SigninState extends State<Signin> {
               style: grey14SemiBoldTextStyle,
             ),
             InkWell(
-             */ /* onTap: () => Navigator.push(
+             *//* onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(builder: (context) => const Signup()),
-              ),*/ /*
+              ),*//*
               child: Text(
                 'Sign Up',
                 style: primaryColor14SemiBoldTextStyle,

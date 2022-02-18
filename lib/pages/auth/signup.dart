@@ -1,18 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
+//import 'package:meet_me/pages/auth/signup2_screen.dart';
+
 import 'package:meet_me/pages/screens.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // ignore: must_be_immutable
-class Signup extends StatefulWidget {
+class Signup extends StatefulWidget {//
+
   @override
   State<Signup> createState() => _SignupState();
 }
 
 class _SignupState extends State<Signup> {
   @override
-  DateTime _selectedDate;
+   DateTime _selectedDate;
   final TextEditingController _textEditingController = TextEditingController();
   final TextEditingController controller = TextEditingController();
   String initialCountry = 'NG';
@@ -22,15 +25,13 @@ class _SignupState extends State<Signup> {
     controller?.dispose();
     super.dispose();
   }
-
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.green,
-          title: Text(
-            'SIGNUP',
-            style: white20BoldTextStyle,
-          )),
+        backgroundColor: Colors.green,
+        title: Text('SIGNUP',style: white20BoldTextStyle,)
+      ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: ListView(
@@ -53,7 +54,7 @@ class _SignupState extends State<Signup> {
               label: "PROFILE CREATED FOR",
               onChanged: print,
               //show selected item
-              // selectedItem: "India",
+             // selectedItem: "India",
             ),
             SizedBox(
               height: 15,
@@ -66,17 +67,14 @@ class _SignupState extends State<Signup> {
                   Container(
                     height: 50,
                     width: 100,
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 18.0, top: 12),
-                      child: Text(
-                        ' MALE ',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
+                    child:Padding(
+                      padding: const EdgeInsets.only(left: 18.0,top: 12),
+                      child: Text(' MALE ',style: TextStyle(fontWeight: FontWeight.bold),),
                     ),
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
+                        color: Colors.black ,
+                        width: 2.0 ,
                       ),
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -84,18 +82,14 @@ class _SignupState extends State<Signup> {
                   Container(
                     height: 50,
                     width: 100,
-                    child: Padding(
+                    child:Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: Text(
-                        ' FEMALE ',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
+                      child: Text(' FEMALE ',style: TextStyle(fontWeight: FontWeight.bold),textAlign: TextAlign.center,),
                     ),
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.black,
-                        width: 2.0,
+                        color: Colors.black ,
+                        width: 2.0 ,
                       ),
                       borderRadius: BorderRadius.circular(15),
                     ),
@@ -110,6 +104,7 @@ class _SignupState extends State<Signup> {
               decoration: const InputDecoration(
                 labelText: 'FIRST NAME',
               ),
+
             ),
             SizedBox(
               height: 15,
@@ -118,6 +113,7 @@ class _SignupState extends State<Signup> {
               decoration: const InputDecoration(
                 labelText: 'LAST NAME',
               ),
+
             ),
             SizedBox(
               height: 15,
@@ -131,9 +127,11 @@ class _SignupState extends State<Signup> {
                 ),
               ),
             ),
+
             SizedBox(
               height: 15,
             ),
+
             DropdownSearch<String>(
               //mode of dropdown
               mode: Mode.BOTTOM_SHEET,
@@ -150,9 +148,11 @@ class _SignupState extends State<Signup> {
               //show selected item
               // selectedItem: "India",
             ),
+
             SizedBox(
               height: 15,
             ),
+
             DropdownSearch<String>(
               //mode of dropdown
               mode: Mode.BOTTOM_SHEET,
@@ -171,6 +171,7 @@ class _SignupState extends State<Signup> {
             SizedBox(
               height: 15,
             ),
+
             DropdownSearch<String>(
               //mode of dropdown
               mode: Mode.BOTTOM_SHEET,
@@ -178,7 +179,14 @@ class _SignupState extends State<Signup> {
               showSearchBox: true,
               showSelectedItem: true,
               //list of dropdown items
-              items: ["Tamil", "Oriya", "Telugu", "Urdu", "Tulu", "Sanskrit"],
+              items: [
+                "Tamil",
+                "Oriya",
+                "Telugu",
+                "Urdu",
+                "Tulu",
+                "Sanskrit"
+              ],
               label: "MOTHER TONGUE",
               onChanged: print,
               //show selected item
@@ -187,6 +195,7 @@ class _SignupState extends State<Signup> {
             SizedBox(
               height: 15,
             ),
+
             DropdownSearch<String>(
               //mode of dropdown
               mode: Mode.BOTTOM_SHEET,
@@ -227,27 +236,26 @@ class _SignupState extends State<Signup> {
               textFieldController: controller,
               formatInput: false,
               keyboardType:
-                  TextInputType.numberWithOptions(signed: true, decimal: true),
+              TextInputType.numberWithOptions(signed: true, decimal: true),
               inputBorder: OutlineInputBorder(),
               onSaved: (PhoneNumber number) {
                 print('On Saved: $number');
               },
             ),
-            SizedBox(
-              height: 15,
-            ),
-            TextField(
-              decoration: const InputDecoration(
-                labelText: 'EMAIL ID',
-              ),
-            ),
+        SizedBox(
+          height: 15,
+        ),
+        TextField(
+          decoration: const InputDecoration(
+            labelText: 'EMAIL ID',
+          ),
+        ),
             SizedBox(
               height: 20,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 20.0),
-              child: Text(
-                  'By clicking on submit button you are agreed with our  '),
+              child: Text('By clicking on submit button you are agreed with our  '),
             ),
             SizedBox(
               height: 7,
@@ -259,14 +267,13 @@ class _SignupState extends State<Signup> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     GestureDetector(
-                        child: new Text('Privacy Policy',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold)),
+                      child: new Text('Privacy Policy', style: TextStyle(
+                        color: Colors.black,fontWeight: FontWeight.bold
+                      )),
                         onTap: () {
                           Navigator.pop(context);
-                          launch('');
-                        }),
+                          launch('');}
+                    ),
                     SizedBox(
                       width: 5,
                     ),
@@ -275,14 +282,15 @@ class _SignupState extends State<Signup> {
                       width: 5,
                     ),
                     GestureDetector(
-                        child: new Text('T&C',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold)),
+                        child: new Text('T&C', style: TextStyle(
+                            color: Colors.black,fontWeight: FontWeight.bold
+                        )),
                         onTap: () {
                           Navigator.pop(context);
-                          launch('');
-                        }),
+                          launch('');}
+                    ),
+
+
                   ],
                 ),
               ),
@@ -295,23 +303,29 @@ class _SignupState extends State<Signup> {
                 textColor: Colors.white,
                 color: Colors.deepOrangeAccent,
                 child: Text("REGISTER"),
-                onPressed: () {},
+                onPressed: () {
+                 /* Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) =>  SignupScreen()),
+                  );*/
+                },
                 shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(30.0),
                 ),
               ),
             )
+
           ],
+
         ),
       ),
     );
   }
-
   _selectDate() async {
     DateTime pickedDate = await showModalBottomSheet<DateTime>(
       context: context,
       builder: (context) {
-        DateTime tempPickedDate = _selectedDate ?? DateTime.now();
+        DateTime tempPickedDate = _selectedDate?? DateTime.now();
         return Container(
           height: 250,
           child: Column(
@@ -327,10 +341,7 @@ class _SignupState extends State<Signup> {
                       },
                     ),
                     CupertinoButton(
-                      child: Text(
-                        'CONFIRM',
-                        style: TextStyle(color: Colors.orange),
-                      ),
+                      child: Text('CONFIRM',style: TextStyle(color: Colors.orange),),
                       onPressed: () {
                         Navigator.of(context).pop(tempPickedDate);
                       },
@@ -346,7 +357,9 @@ class _SignupState extends State<Signup> {
                 child: Container(
                   child: CupertinoDatePicker(
                     mode: CupertinoDatePickerMode.date,
-                    onDateTimeChanged: (value) {},
+                    onDateTimeChanged: (value) {
+
+                    },
                     initialDateTime: DateTime.now(),
                   ),
                 ),
@@ -365,3 +378,4 @@ class _SignupState extends State<Signup> {
     }
   }
 }
+

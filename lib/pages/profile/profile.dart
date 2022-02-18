@@ -198,7 +198,7 @@ class Profile extends StatelessWidget {
     );
   }
 
-  detail({String title, String image, Color color, Function ontap}) {
+  detail({ String title,  String image, Color color, Function ontap}) {
     return InkWell(
       onTap: ontap as void Function(),
       child: Padding(

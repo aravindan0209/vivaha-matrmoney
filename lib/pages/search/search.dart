@@ -1,37 +1,48 @@
 import 'package:meet_me/pages/screens.dart';
+import 'package:meet_me/widget/column_builder.dart';
 
-class SearchFilter extends StatefulWidget {
-  const SearchFilter({Key key}) : super(key: key);
+class Search extends StatefulWidget {
+  const Search({Key key}) : super(key: key);
 
   @override
-  _SearchFilterState createState() => _SearchFilterState();
+  State<Search> createState() => _SearchState();
 }
 
-class _SearchFilterState extends State<SearchFilter> {
-  String ageFrom;
-  String ageTo;
-  String heightFrom;
-  String heightTo;
-  String status;
-  String country;
-  String city;
-  String education;
-  String profession;
-  String religion;
-  String caste;
-  String income;
+class _SearchState extends State<Search> {
+  final searchList = [
+    {
+      'image': 'assets/users/user2.png',
+      'name': 'Krishna Doe',
+      'year': '26',
+      'height': '5 ft 3 in',
+      'city': 'Delhi',
+      'country': 'India',
+    },
+    {
+      'image': 'assets/users/user12.png',
+      'name': 'Rashmika John',
+      'year': '25',
+      'height': '5 ft 4 in',
+      'city': 'Delhi',
+      'country': 'India',
+    },
+    {
+      'image': 'assets/users/user13.png',
+      'name': 'Tina Patel',
+      'year': '26',
+      'height': '5 ft 4 in',
+      'city': 'Gujarat',
+      'country': 'India',
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 0,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          icon: const Icon(Icons.arrow_back_ios),
-        ),
+        automaticallyImplyLeading: false,
         title: Text(
-          'Filter',
+          'Search',
           style: black20BoldTextStyle,
         ),
       ),
@@ -39,1137 +50,154 @@ class _SearchFilterState extends State<SearchFilter> {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: fixPadding * 2.0),
         children: [
+          searchTextField(),
           heightSpace,
           heightSpace,
           heightSpace,
           heightSpace,
-          age(),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          height(),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          maritalStatus(),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          selectCountry(),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          stateCity(),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          selectEducation(),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          selectProfession(),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          selectReligion(),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          selectCaste(),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          annualIncome(),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          applyButton(),
-          heightSpace,
-          heightSpace,
-          heightSpace,
-          heightSpace,
+          searches(),
+          searchList.isNotEmpty
+              ? InkWell(
+                  onTap: () {
+                    setState(() {
+                      searchList.clear();
+                    });
+                  },
+                  child: Text(
+                    'Clear',
+                    textAlign: TextAlign.center,
+                    style: grey12BlackTextStyle,
+                  ),
+                )
+              : Column(
+                  children: [
+                    const Icon(
+                      Icons.search,
+                      color: greyColor,
+                      size: 30,
+                    ),
+                    Text(
+                      'Search history is empty',
+                      textAlign: TextAlign.center,
+                      style: grey13SemiBoldTextStyle,
+                    ),
+                  ],
+                ),
         ],
       ),
     );
   }
 
-  age() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: greyColor.withOpacity(0.15),
-                blurRadius: 2,
-                spreadRadius: 2,
+  searchTextField() {
+    return SizedBox(
+      height: 38,
+      child: TextField(
+        cursorColor: primaryColor,
+        style: black14SemiBoldTextStyle,
+        decoration: InputDecoration(
+          isDense: true,
+          hintText: 'Search profile based on your preferences',
+          hintStyle: grey11RegularTextStyle,
+          suffixIcon: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              InkWell(
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const SearchFilter()),
+                ),
+                child: Image.asset(
+                  'assets/icons/filter.png',
+                  height: 16,
+                  width: 16,
+                  color: greyColor,
+                ),
+              ),
+              widthSpace,
+              widthSpace,
+              const Icon(
+                Icons.search,
+                color: greyColor,
+                size: 18,
               ),
             ],
           ),
-          child: Text(
-            '01',
-            style: black13BoldTextStyle,
+          border: const UnderlineInputBorder(
+            borderSide: BorderSide(color: greyColor),
+          ),
+          focusedBorder: const UnderlineInputBorder(
+            borderSide: BorderSide(color: greyColor),
           ),
         ),
-        widthSpace,
-        widthSpace,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 3),
-              Text(
-                'Age',
-                style: black15BoldTextStyle,
+      ),
+    );
+  }
+
+  searches() {
+    return ColumnBuilder(
+      itemCount: searchList.length,
+      itemBuilder: (context, index) {
+        final item = searchList[index];
+        return Column(
+          children: [
+            InkWell(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProfileDetails(
+                    tag: searchList[index],
+                    image: item['image'],
+                  ),
+                ),
               ),
-              heightSpace,
-              Row(
+              child: Row(
                 children: [
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: fixPadding,
-                        vertical: 2,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: blackColor),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'From',
-                            style: grey13SemiBoldTextStyle,
-                          ),
-                          DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              elevation: 0,
-                              isDense: true,
-                              hint: Text(
-                                '21',
-                                style: black13RegularTextStyle,
-                              ),
-                              icon: const Icon(
-                                Icons.keyboard_arrow_down,
-                                color: primaryColor,
-                                size: 20,
-                              ),
-                              value: ageFrom,
-                              style: black13RegularTextStyle,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  ageFrom = newValue;
-                                });
-                              },
-                              items: <String>[
-                                '18',
-                                '19',
-                                '20',
-                                '21',
-                                '22',
-                                '23',
-                                '24',
-                                '25',
-                                '26',
-                                '27',
-                                '28',
-                                '29',
-                                '30',
-                                '31',
-                                '32',
-                                '33',
-                                '34',
-                                '35',
-                                '36',
-                                '37',
-                                '38',
-                                '39',
-                                '40',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        ],
+                  Container(
+                    height: 55,
+                    width: 55,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(3),
+                      image: DecorationImage(
+                        image: AssetImage(item['image']),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   widthSpace,
                   widthSpace,
-                  widthSpace,
-                  widthSpace,
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: fixPadding,
-                        vertical: 2,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        item['name'],
+                        style: black14SemiBoldTextStyle,
                       ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: blackColor),
-                        borderRadius: BorderRadius.circular(5),
+                      Text(
+                        '${item['year']} yrs - ${item['height']}',
+                        style: grey12RegularTextStyle,
                       ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'To',
-                            style: grey13SemiBoldTextStyle,
-                          ),
-                          DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              elevation: 0,
-                              isDense: true,
-                              hint: Text(
-                                '25',
-                                style: black13RegularTextStyle,
-                              ),
-                              icon: const Icon(
-                                Icons.keyboard_arrow_down,
-                                color: primaryColor,
-                              ),
-                              value: ageTo,
-                              style: black13RegularTextStyle,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  ageTo = newValue;
-                                });
-                              },
-                              items: <String>[
-                                '18',
-                                '19',
-                                '20',
-                                '21',
-                                '22',
-                                '23',
-                                '24',
-                                '25',
-                                '26',
-                                '27',
-                                '28',
-                                '29',
-                                '30',
-                                '31',
-                                '32',
-                                '33',
-                                '34',
-                                '35',
-                                '36',
-                                '37',
-                                '38',
-                                '39',
-                                '40',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        ],
+                      Text(
+                        '${item['city']}, ${item['country']}',
+                        style: grey12RegularTextStyle,
                       ),
-                    ),
+                    ],
                   ),
                 ],
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  height() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: greyColor.withOpacity(0.15),
-                blurRadius: 2,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Text(
-            '02',
-            style: black13BoldTextStyle,
-          ),
-        ),
-        widthSpace,
-        widthSpace,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 3),
-              Row(
-                children: [
-                  Text(
-                    'Height ',
-                    style: black15BoldTextStyle,
-                  ),
-                  Text(
-                    '(Ft In)',
-                    style: grey13SemiBoldTextStyle,
-                  ),
-                ],
-              ),
-              heightSpace,
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: fixPadding,
-                        vertical: 2,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: blackColor),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'From',
-                            style: grey13SemiBoldTextStyle,
-                          ),
-                          DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              elevation: 0,
-                              isDense: true,
-                              hint: Text(
-                                '4 ft 2 in',
-                                style: black13RegularTextStyle,
-                              ),
-                              icon: const Icon(
-                                Icons.keyboard_arrow_down,
-                                color: primaryColor,
-                                size: 20,
-                              ),
-                              value: heightFrom,
-                              style: black13RegularTextStyle,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  heightFrom = newValue;
-                                });
-                              },
-                              items: <String>[
-                                '3 ft 2 in',
-                                '4 ft 2 in',
-                                '5 ft 2 in',
-                                '6 ft 2 in',
-                                '7 ft 0 in',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  widthSpace,
-                  widthSpace,
-                  widthSpace,
-                  widthSpace,
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: fixPadding,
-                        vertical: 2,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: blackColor),
-                        borderRadius: BorderRadius.circular(5),
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'To',
-                            style: grey13SemiBoldTextStyle,
-                          ),
-                          DropdownButtonHideUnderline(
-                            child: DropdownButton(
-                              isExpanded: true,
-                              elevation: 0,
-                              isDense: true,
-                              hint: Text(
-                                '5 ft 2 in',
-                                style: black13RegularTextStyle,
-                              ),
-                              icon: const Icon(
-                                Icons.keyboard_arrow_down,
-                                color: primaryColor,
-                              ),
-                              value: heightTo,
-                              style: black13RegularTextStyle,
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  heightTo = newValue;
-                                });
-                              },
-                              items: <String>[
-                                '3 ft 2 in',
-                                '4 ft 2 in',
-                                '5 ft 2 in',
-                                '6 ft 2 in',
-                                '7 ft 0 in',
-                              ].map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              }).toList(),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  maritalStatus() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: greyColor.withOpacity(0.15),
-                blurRadius: 2,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Text(
-            '03',
-            style: black13BoldTextStyle,
-          ),
-        ),
-        widthSpace,
-        widthSpace,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 3),
-              Text(
-                'Marital Status',
-                style: black15BoldTextStyle,
-              ),
-              heightSpace,
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: fixPadding,
-                  vertical: fixPadding / 2,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: blackColor),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    isExpanded: true,
-                    elevation: 0,
-                    isDense: true,
-                    hint: Text(
-                      'Single ',
-                      style: black13RegularTextStyle,
-                    ),
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: primaryColor,
-                      size: 20,
-                    ),
-                    value: status,
-                    style: black13RegularTextStyle,
-                    onChanged: (String newValue) {
-                      setState(() {
-                        status = newValue;
-                      });
-                    },
-                    items: <String>[
-                      'Single ',
-                      'Divorced ',
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  selectCountry() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: greyColor.withOpacity(0.15),
-                blurRadius: 2,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Text(
-            '04',
-            style: black13BoldTextStyle,
-          ),
-        ),
-        widthSpace,
-        widthSpace,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 3),
-              Text(
-                'Country',
-                style: black15BoldTextStyle,
-              ),
-              heightSpace,
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: fixPadding,
-                  vertical: fixPadding / 2,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: blackColor),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    isExpanded: true,
-                    elevation: 0,
-                    isDense: true,
-                    hint: Text(
-                      'India',
-                      style: black13RegularTextStyle,
-                    ),
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: primaryColor,
-                      size: 20,
-                    ),
-                    value: country,
-                    style: black13RegularTextStyle,
-                    onChanged: (String newValue) {
-                      setState(() {
-                        country = newValue;
-                      });
-                    },
-                    items: <String>[
-                      'Any',
-                      'India',
-                      'USA',
-                      'Belize',
-                      'Canada',
-                      'Mexico',
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  stateCity() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: greyColor.withOpacity(0.15),
-                blurRadius: 2,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Text(
-            '05',
-            style: black13BoldTextStyle,
-          ),
-        ),
-        widthSpace,
-        widthSpace,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 3),
-              Text(
-                'State - City',
-                style: black15BoldTextStyle,
-              ),
-              heightSpace,
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: fixPadding,
-                  vertical: fixPadding / 2,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: blackColor),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    isExpanded: true,
-                    elevation: 0,
-                    isDense: true,
-                    hint: Text(
-                      'Any',
-                      style: black13RegularTextStyle,
-                    ),
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: primaryColor,
-                      size: 20,
-                    ),
-                    value: city,
-                    style: black13RegularTextStyle,
-                    onChanged: (String newValue) {
-                      setState(() {
-                        city = newValue;
-                      });
-                    },
-                    items: <String>[
-                      'Any',
-                      'Surat',
-                      'Delhi',
-                      'Baroda',
-                      'Vapi',
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  selectEducation() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: greyColor.withOpacity(0.15),
-                blurRadius: 2,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Text(
-            '06',
-            style: black13BoldTextStyle,
-          ),
-        ),
-        widthSpace,
-        widthSpace,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 3),
-              Text(
-                'Education',
-                style: black15BoldTextStyle,
-              ),
-              heightSpace,
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: fixPadding,
-                  vertical: fixPadding / 2,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: blackColor),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    isExpanded: true,
-                    elevation: 0,
-                    isDense: true,
-                    hint: Text(
-                      'Any',
-                      style: black13RegularTextStyle,
-                    ),
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: primaryColor,
-                      size: 20,
-                    ),
-                    value: education,
-                    style: black13RegularTextStyle,
-                    onChanged: (String newValue) {
-                      setState(() {
-                        education = newValue;
-                      });
-                    },
-                    items: <String>[
-                      'Any',
-                      'BCA',
-                      'BBA',
-                      'Bcom',
-                      'MCA',
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  selectProfession() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: greyColor.withOpacity(0.15),
-                blurRadius: 2,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Text(
-            '07',
-            style: black13BoldTextStyle,
-          ),
-        ),
-        widthSpace,
-        widthSpace,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 3),
-              Text(
-                'Profession',
-                style: black15BoldTextStyle,
-              ),
-              heightSpace,
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: fixPadding,
-                  vertical: fixPadding / 2,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: blackColor),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    isExpanded: true,
-                    elevation: 0,
-                    isDense: true,
-                    hint: Text(
-                      'Any',
-                      style: black13RegularTextStyle,
-                    ),
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: primaryColor,
-                      size: 20,
-                    ),
-                    value: profession,
-                    style: black13RegularTextStyle,
-                    onChanged: (String newValue) {
-                      setState(() {
-                        profession = newValue;
-                      });
-                    },
-                    items: <String>[
-                      'Any',
-                      'Software Engineer',
-                      'CA',
-                      'Doctor',
-                      'Professor',
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  selectReligion() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: greyColor.withOpacity(0.15),
-                blurRadius: 2,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Text(
-            '08',
-            style: black13BoldTextStyle,
-          ),
-        ),
-        widthSpace,
-        widthSpace,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 3),
-              Text(
-                'Religion',
-                style: black15BoldTextStyle,
-              ),
-              heightSpace,
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: fixPadding,
-                  vertical: fixPadding / 2,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: blackColor),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    isExpanded: true,
-                    elevation: 0,
-                    isDense: true,
-                    hint: Text(
-                      'Hindu',
-                      style: black13RegularTextStyle,
-                    ),
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: primaryColor,
-                      size: 20,
-                    ),
-                    value: religion,
-                    style: black13RegularTextStyle,
-                    onChanged: (String newValue) {
-                      setState(() {
-                        religion = newValue;
-                      });
-                    },
-                    items: <String>[
-                      'Any',
-                      'Hindu',
-                      'Christianity',
-                      'Islam',
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  selectCaste() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: greyColor.withOpacity(0.15),
-                blurRadius: 2,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Text(
-            '09',
-            style: black13BoldTextStyle,
-          ),
-        ),
-        widthSpace,
-        widthSpace,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 3),
-              Text(
-                'Caste',
-                style: black15BoldTextStyle,
-              ),
-              heightSpace,
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: fixPadding,
-                  vertical: fixPadding / 2,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: blackColor),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    isExpanded: true,
-                    elevation: 0,
-                    isDense: true,
-                    hint: Text(
-                      'Any',
-                      style: black13RegularTextStyle,
-                    ),
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: primaryColor,
-                      size: 20,
-                    ),
-                    value: caste,
-                    style: black13RegularTextStyle,
-                    onChanged: (String newValue) {
-                      setState(() {
-                        caste = newValue;
-                      });
-                    },
-                    items: <String>[
-                      'Any',
-                      'Hindu',
-                      'Khatri',
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  annualIncome() {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: whiteColor,
-            shape: BoxShape.circle,
-            boxShadow: [
-              BoxShadow(
-                color: greyColor.withOpacity(0.15),
-                blurRadius: 2,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Text(
-            '10',
-            style: black13BoldTextStyle,
-          ),
-        ),
-        widthSpace,
-        widthSpace,
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(height: 3),
-              Text(
-                'Annual Income',
-                style: black15BoldTextStyle,
-              ),
-              heightSpace,
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: fixPadding,
-                  vertical: fixPadding / 2,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(color: blackColor),
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    isExpanded: true,
-                    elevation: 0,
-                    isDense: true,
-                    hint: Text(
-                      'Above Rs.5,00,000',
-                      style: black13RegularTextStyle,
-                    ),
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: primaryColor,
-                      size: 20,
-                    ),
-                    value: income,
-                    style: black13RegularTextStyle,
-                    onChanged: (String newValue) {
-                      setState(() {
-                        income = newValue;
-                      });
-                    },
-                    items: <String>[
-                      'Above Rs.2,00,000',
-                      'Above Rs.3,00,000',
-                      'Above Rs.4,00,000',
-                      'Above Rs.5,00,000',
-                      'Above Rs.6,00,000',
-                    ].map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  applyButton() {
-    return Row(
-      children: [
-        Text(
-          'Clear',
-          style: primaryColor12BlackTextStyle,
-        ),
-        widthSpace,
-        widthSpace,
-        Expanded(
-          child: InkWell(
-            onTap: () => Navigator.pop(context),
-            child: Container(
-              padding: const EdgeInsets.all(fixPadding),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                color: primaryColor,
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Text(
-                'Apply',
-                style: white16BoldTextStyle,
               ),
             ),
-          ),
-        ),
-      ],
+            divider(),
+          ],
+        );
+      },
+    );
+  }
+
+  divider() {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: fixPadding * 2.0),
+      color: greyColor,
+      height: 1,
+      width: double.infinity,
     );
   }
 }

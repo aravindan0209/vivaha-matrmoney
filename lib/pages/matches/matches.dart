@@ -9,7 +9,7 @@ class Matches extends StatefulWidget {
 }
 
 class _MatchesState extends State<Matches> {
-  double height;
+   double height;
 
   final matchesList = [
     {
