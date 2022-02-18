@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
-//import 'package:meet_me/pages/auth/signup2_screen.dart';
+import 'package:meet_me/pages/auth/signup_screen2.dart';
+
+
 
 import 'package:meet_me/pages/screens.dart';
 import 'package:dropdown_search/dropdown_search.dart';
@@ -304,10 +306,10 @@ class _SignupState extends State<Signup> {
                 color: Colors.deepOrangeAccent,
                 child: Text("REGISTER"),
                 onPressed: () {
-                 /* Navigator.push(
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) =>  SignupScreen()),
-                  );*/
+                  );
                 },
                 shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(30.0),
