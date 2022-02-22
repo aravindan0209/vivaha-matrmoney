@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:meet_me/Model/ResentJoin.dart';
+import 'package:meet_me/Network/Network.dart';
 import 'package:meet_me/pages/screens.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -9,38 +13,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  double height;
-  double width;
-
-  final newMatchesList = [
-    {
-      'image': 'assets/users/user3.png',
-      'name': 'Samantha John',
-      'year': '26',
-      'height': '5 ft 2 inch',
-      'id': '#123456',
-      'city': 'Delhi',
-      'star': true,
-    },
-    {
-      'image': 'assets/users/user4.png',
-      'name': 'Rashmika John',
-      'year': '26',
-      'height': '5 ft 2 inch',
-      'id': '#198456',
-      'city': 'Delhi',
-      'star': false,
-    },
-    {
-      'image': 'assets/users/user5.png',
-      'name': 'Isha John',
-      'year': '26',
-      'height': '5 ft 2 inch',
-      'id': '#102456',
-      'city': 'Delhi',
-      'star': true,
-    },
-  ];
+   double height;
+   double width;
+  List<ResentJoin> newMatchesList = <ResentJoin>[];
+  List<ResentJoin> myMatch = <ResentJoin>[];
+  List<ResentJoin> fProfile = <ResentJoin>[];
+  List<ResentJoin> rVisited = <ResentJoin>[];
 
   final membersList = [
     {
@@ -99,6 +77,92 @@ class _HomeState extends State<Home> {
     },
   ];
 
+  Future<List<ResentJoin>> fetchJoined() async {
+    List<ResentJoin> res = <ResentJoin>[];
+    var data = {'matri_id': "LV23", 'gender': "Female"};
+    var response = await Network()
+        .login('https://lankavivaha.com/dev/api/resent_join.php', data);
+    var body = json.decode(response.data);
+
+    for (int i = 1; i <= body['responseData'].length; i++) {
+      ResentJoin resentJoin = ResentJoin();
+      resentJoin = ResentJoin.fromJson(body['responseData'][i.toString()]);
+      res.add(resentJoin);
+    }
+    return res;
+  }
+
+  Future<List<ResentJoin>> fetchMatch() async {
+    List<ResentJoin> res = <ResentJoin>[];
+    var data = {'matri_id': "LV23", 'gender': "Female"};
+    var response = await Network()
+        .login('https://lankavivaha.com/dev/api/match.php', data);
+    var body = json.decode(response.data);
+
+    for (int i = 1; i <= body['responseData'].length; i++) {
+      ResentJoin resentJoin = ResentJoin();
+      resentJoin = ResentJoin.fromJson(body['responseData'][i.toString()]);
+      res.add(resentJoin);
+    }
+    return res;
+  }
+
+  Future<List<ResentJoin>> fetchViewed() async {
+    List<ResentJoin> res = <ResentJoin>[];
+    var data = {'matri_id': "LV23", 'gender': "Female"};
+    var response = await Network()
+        .login('https://lankavivaha.com/dev/api/featured.php', data);
+    var body = json.decode(response.data);
+
+    for (int i = 1; i <= body['responseData'].length; i++) {
+      ResentJoin resentJoin = ResentJoin();
+      resentJoin = ResentJoin.fromJson(body['responseData'][i.toString()]);
+      res.add(resentJoin);
+    }
+    return res;
+  }
+
+  Future<List<ResentJoin>> fetchVisited() async {
+    List<ResentJoin> res = <ResentJoin>[];
+    var data = {'matri_id': "LV23", 'gender': "Female"};
+    var response = await Network()
+        .login('https://lankavivaha.com/dev/api/profile_viewd_by_me.php', data);
+    var body = json.decode(response.data);
+
+    for (int i = 1; i <= body['responseData'].length; i++) {
+      ResentJoin resentJoin = ResentJoin();
+      resentJoin = ResentJoin.fromJson(body['responseData'][i.toString()]);
+      res.add(resentJoin);
+    }
+    return res;
+  }
+
+  @override
+  void initState() {
+    fetchJoined().then((value) {
+      setState(() {
+        newMatchesList = value;
+      });
+    });
+    fetchMatch().then((value) {
+      setState(() {
+        myMatch = value;
+      });
+    });
+    fetchViewed().then((value) {
+      setState(() {
+        fProfile = value;
+      });
+    });
+    fetchVisited().then((value) {
+      setState(() {
+        rVisited = value;
+      });
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     height = MediaQuery.of(context).size.height;
@@ -107,7 +171,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text(
-          'Home Page',
+          'Home',
           style: black20BoldTextStyle,
         ),
       ),
@@ -117,9 +181,12 @@ class _HomeState extends State<Home> {
         children: [
           userProfile(),
           newMatches(),
-          discoverMatches(),
-          completeProfile(),
-          membersLookingForYou(),
+          myMatches(),
+          featuredProfile(),
+          recentlyVisited()
+          /* discoverMatches(),
+          completeProfile(),*/
+          // membersLookingForYou(),
         ],
       ),
     );
@@ -219,7 +286,7 @@ class _HomeState extends State<Home> {
   newMatches() {
     return Column(
       children: [
-        title('New Matches'),
+        title('Recent Joined'),
         SizedBox(
           height: height * 0.22,
           child: ListView.builder(
@@ -238,8 +305,8 @@ class _HomeState extends State<Home> {
                     MaterialPageRoute(
                       builder: (context) => ProfileDetails(
                         tag: newMatchesList[index],
-                        image: item['image'] as String,
-                        id: item['id'] as String,
+                        image: item.userProfilePicture,
+                        id: item.userId,
                       ),
                     ),
                   ),
@@ -265,7 +332,7 @@ class _HomeState extends State<Home> {
                                   height: height * 0.1316,
                                   width: width * 0.36,
                                   child: Image.asset(
-                                    item['image'] as String,
+                                    item.userProfilePicture.toString(),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
@@ -274,13 +341,14 @@ class _HomeState extends State<Home> {
                                 bottom: 2,
                                 right: 5,
                                 child: InkWell(
+/*
                                   onTap: () {
                                     setState(() {
-                                      item['star'] = !(item['star'] as bool);
+                                      item.star = !(item['star'] as bool);
                                     });
                                     ScaffoldMessenger.of(context).showSnackBar(
                                       SnackBar(
-                                        content: item['star'] == true
+                                        content: item['star']! == true
                                             ? const Text('Add to shortlist')
                                             : const Text(
                                                 'Remove from shortlist'),
@@ -288,13 +356,14 @@ class _HomeState extends State<Home> {
                                     );
                                   },
                                   child: Icon(
-                                    item['star'] == true
+                                    item['star']! == true
                                         ? Icons.star_rounded
                                         : Icons.star_border_rounded,
                                     size: 18,
                                     color: primaryColor,
                                   ),
-                                ),
+*/
+                                    ),
                               ),
                             ],
                           ),
@@ -304,18 +373,18 @@ class _HomeState extends State<Home> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  item['name'] as String,
+                                  item.username.toString(),
                                   style: black14SemiBoldTextStyle,
                                 ),
                                 Row(
                                   children: [
                                     Text(
-                                      '${item['year']} Yrs,',
+                                      '${item.age} Yrs,',
                                       style: grey12RegularTextStyle,
                                     ),
                                     widthSpace,
                                     Text(
-                                      item['height'] as String,
+                                      item.height as String,
                                       style: grey12RegularTextStyle,
                                     ),
                                   ],
@@ -323,12 +392,417 @@ class _HomeState extends State<Home> {
                                 Row(
                                   children: [
                                     Text(
-                                      item['id'] as String,
+                                      item.userId as String,
                                       style: grey12RegularTextStyle,
                                     ),
                                     widthSpace,
                                     Text(
-                                      item['city'] as String,
+                                      item.cityName as String,
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  myMatches() {
+    return Column(
+      children: [
+        title('My Matches'),
+        SizedBox(
+          height: height * 0.22,
+          child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemCount: myMatch.length,
+            itemBuilder: (context, index) {
+              final item = myMatch[index];
+              return Padding(
+                padding: EdgeInsets.only(
+                    left: index == 0 ? fixPadding * 2.0 : fixPadding),
+                child: InkWell(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileDetails(
+                        tag: myMatch[index],
+                        image: item.userProfilePicture,
+                        id: item.userId,
+                      ),
+                    ),
+                  ),
+                  child: Card(
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: ClipPath(
+                      clipper: ShapeBorderClipper(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              Hero(
+                                tag: myMatch[index],
+                                child: SizedBox(
+                                  height: height * 0.1316,
+                                  width: width * 0.36,
+                                  child: Image.asset(
+                                    item.userProfilePicture.toString(),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 2,
+                                right: 5,
+                                child: InkWell(
+/*
+                                  onTap: () {
+                                    setState(() {
+                                      item.star = !(item['star'] as bool);
+                                    });
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: item['star']! == true
+                                            ? const Text('Add to shortlist')
+                                            : const Text(
+                                                'Remove from shortlist'),
+                                      ),
+                                    );
+                                  },
+                                  child: Icon(
+                                    item['star']! == true
+                                        ? Icons.star_rounded
+                                        : Icons.star_border_rounded,
+                                    size: 18,
+                                    color: primaryColor,
+                                  ),
+*/
+                                    ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(fixPadding / 2),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.username.toString(),
+                                  style: black14SemiBoldTextStyle,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '${item.age} Yrs,',
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                    widthSpace,
+                                    Text(
+                                      item.height as String,
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      item.userId as String,
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                    widthSpace,
+                                    Text(
+                                      item.cityName as String,
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  featuredProfile() {
+    return Column(
+      children: [
+        title('Featured Profile'),
+        SizedBox(
+          height: height * 0.22,
+          child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemCount: fProfile.length,
+            itemBuilder: (context, index) {
+              final item = fProfile[index];
+              return Padding(
+                padding: EdgeInsets.only(
+                    left: index == 0 ? fixPadding * 2.0 : fixPadding),
+                child: InkWell(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileDetails(
+                        tag: fProfile[index],
+                        image: item.userProfilePicture,
+                        id: item.userId,
+                      ),
+                    ),
+                  ),
+                  child: Card(
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: ClipPath(
+                      clipper: ShapeBorderClipper(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              Hero(
+                                tag: fProfile[index],
+                                child: SizedBox(
+                                  height: height * 0.1316,
+                                  width: width * 0.36,
+                                  child: Image.asset(
+                                    item.userProfilePicture.toString(),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 2,
+                                right: 5,
+                                child: InkWell(
+/*
+                                  onTap: () {
+                                    setState(() {
+                                      item.star = !(item['star'] as bool);
+                                    });
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: item['star']! == true
+                                            ? const Text('Add to shortlist')
+                                            : const Text(
+                                                'Remove from shortlist'),
+                                      ),
+                                    );
+                                  },
+                                  child: Icon(
+                                    item['star']! == true
+                                        ? Icons.star_rounded
+                                        : Icons.star_border_rounded,
+                                    size: 18,
+                                    color: primaryColor,
+                                  ),
+*/
+                                    ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(fixPadding / 2),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.username.toString(),
+                                  style: black14SemiBoldTextStyle,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '${item.age} Yrs,',
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                    widthSpace,
+                                    Text(
+                                      item.height as String,
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      item.userId as String,
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                    widthSpace,
+                                    Text(
+                                      item.cityName as String,
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  recentlyVisited() {
+    return Column(
+      children: [
+        title('Recently visited profile'),
+        SizedBox(
+          height: height * 0.22,
+          child: ListView.builder(
+            physics: const BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            shrinkWrap: true,
+            itemCount: rVisited.length,
+            itemBuilder: (context, index) {
+              final item = rVisited[index];
+              return Padding(
+                padding: EdgeInsets.only(
+                    left: index == 0 ? fixPadding * 2.0 : fixPadding),
+                child: InkWell(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ProfileDetails(
+                        tag: rVisited[index],
+                        image: item.userProfilePicture,
+                        id: item.userId,
+                      ),
+                    ),
+                  ),
+                  child: Card(
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: ClipPath(
+                      clipper: ShapeBorderClipper(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5),
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Stack(
+                            children: [
+                              Hero(
+                                tag: rVisited[index],
+                                child: SizedBox(
+                                  height: height * 0.1316,
+                                  width: width * 0.36,
+                                  child: Image.asset(
+                                    item.userProfilePicture.toString(),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                bottom: 2,
+                                right: 5,
+                                child: InkWell(
+/*
+                                  onTap: () {
+                                    setState(() {
+                                      item.star = !(item['star'] as bool);
+                                    });
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: item['star']! == true
+                                            ? const Text('Add to shortlist')
+                                            : const Text(
+                                                'Remove from shortlist'),
+                                      ),
+                                    );
+                                  },
+                                  child: Icon(
+                                    item['star']! == true
+                                        ? Icons.star_rounded
+                                        : Icons.star_border_rounded,
+                                    size: 18,
+                                    color: primaryColor,
+                                  ),
+*/
+                                    ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(fixPadding / 2),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  item.username.toString(),
+                                  style: black14SemiBoldTextStyle,
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      '${item.age} Yrs,',
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                    widthSpace,
+                                    Text(
+                                      item.height as String,
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Text(
+                                      item.userId as String,
+                                      style: grey12RegularTextStyle,
+                                    ),
+                                    widthSpace,
+                                    Text(
+                                      item.cityName as String,
                                       style: grey12RegularTextStyle,
                                     ),
                                   ],
